@@ -1,8 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
+import ProductService from './services/ProductService';
 
 function App() {
+
+  const ps = new ProductService();
+  console.log(ps.getProducts());
+
   return (
     <div className="App">
       <header className="App-header">
