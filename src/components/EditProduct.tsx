@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useProductContext } from '../context/ProductContext';
+import { ProductContextData, useProductContext } from '../context/ProductContext.tsx';
+import Product from '../model/product.ts';
 
 const EditProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { products, updateProduct } = useProductContext();
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState<Product>();
 
   useEffect(() => {
-    const selectedProduct = products.find(p => p.id === id);
+    const selectedProduct = products?.find(p => p.id === id);
     setProduct(selectedProduct);
   }, [id, products]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setProduct(prevProduct => ({ ...prevProduct, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!product) return;
-    await updateProduct(product);
+    await updateProduct?.(product);
     navigate('/home');
   };
 

@@ -1,0 +1,5 @@
+{
+    "productWebserver": "ws://localhost:8081/productWebserver",
+    "restServiceBase": "http://localhost:8080/product",
+    "productUpdateTopic": "/topic/productUpdate"
+}

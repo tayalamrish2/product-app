@@ -2,15 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProductService from './services/ProductService.ts';
-import { ProductProvider } from './context/ProductContext';
-import ProductList from './components/ProductList';
-import EditProduct from './components/EditProduct';
-import CreateProduct from './components/CreateProduct';
+import { ProductProvider } from './context/ProductContext.tsx';
+import ProductList from './components/ProductList.tsx';
+import EditProduct from './components/EditProduct.tsx';
+import CreateProduct from './components/CreateProduct.tsx';
 
 function App() {
-
-
-
   return (
     <div className="App">
       <header className="App-header">        

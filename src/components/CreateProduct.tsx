@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { useProductContext } from '../context/ProductContext';
+import { useProductContext } from '../context/ProductContext.tsx';
 import { useNavigate } from 'react-router-dom';
+import Product from '../model/product.ts'
 
 const CreateProduct = () => {
   const { createProduct } = useProductContext();
   const navigate = useNavigate();
-  const [newProduct, setNewProduct] = useState({ productName: '', productPrice: '' });
+  const [newProduct, setNewProduct] = useState<Product>({ productName: '', productPrice: 0 });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setNewProduct(prevProduct => ({ ...prevProduct, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    createProduct(newProduct).then(() => navigate('/home'));    
+    createProduct?.(newProduct).then(() => navigate('/home'));    
   };
 
   return (
