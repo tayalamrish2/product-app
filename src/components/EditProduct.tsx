@@ -12,7 +12,7 @@ const EditProduct = () => {
   useEffect(() => {
     const selectedProduct = products?.find(p => p.id === id);
     setProduct(selectedProduct);
-  }, [id, products]);
+  }, [products]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;

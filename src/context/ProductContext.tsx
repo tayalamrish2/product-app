@@ -16,19 +16,17 @@ export const ProductProvider: React.FC<ProductContextProps> = ({ productService,
 
   useEffect(() => {
     productService.getProducts();
-    productService.getProductsObservable().subscribe(d => setProducts(d));
-    //TODO Unsubscribe
-  }, [productService]);
+    const subs = productService.getProductsObservable().subscribe(d => setProducts(d));   
+    
+    return () => subs.unsubscribe();
+  }, []);
 
   const updateProduct = (data: Product) => {
     return productService.updateProduct(data);
-    //.then(() => {setProducts(prevProducts => prevProducts.map(p => (p.id === data.id ? { ...p, ...data } : p)));
-    //};
   };
 
   const createProduct = (data: Product) => {
     return productService.createProduct(data);
-    //.then((product) => {setProducts(prevProducts => [...prevProducts, product]);});
   };
 
   return (
@@ -39,7 +37,7 @@ export const ProductProvider: React.FC<ProductContextProps> = ({ productService,
 };
 
 export interface ProductContextData {
-  products: Product[], 
-  updateProduct: (data: Product) => Promise<AxiosResponse<any, any>>, 
-  createProduct: (data: Product) => Promise<AxiosResponse<any, any>>
+  products?: Product[], 
+  updateProduct?: (data: Product) => Promise<AxiosResponse<any, any>>, 
+  createProduct?: (data: Product) => Promise<AxiosResponse<any, any>>
 }
